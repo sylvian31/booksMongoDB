@@ -1,11 +1,22 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/books_test', {
-    useNewUrlParser: true 
-});
 
-mongoose.connection.once('open', () => {
-    console.log("connexion etablie")
-}).on('error', (error) => {
-    console.log("Erreur durant la connexion", error);
-});
+before( (done) => {
+    mongoose.connect('mongodb://localhost/books_test', {
+        useNewUrlParser: true 
+    });
+    
+    mongoose.connection.once('open', () => {
+        console.log("connexion etablie");
+        done();
+    }).on('error', (error) => {
+        console.log("Erreur durant la connexion", error);
+    });
+})
+
+beforeEach('Delete old books', (done) => {
+    const {books} = mongoose.connection.collections;
+    books.drop( () => {
+        done();
+    })
+})
