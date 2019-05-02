@@ -7,6 +7,8 @@ describe('Test read', () => {
         book1 = new Book({ title: "Game of thrones" });
         book1.save().then(() => {
             done();
+        }).catch((error) => {
+            console.log("Promise rejected", error);
         });
     })
 
@@ -15,6 +17,8 @@ describe('Test read', () => {
             //assert(books[0]._id === book1._id) //test de ladresse de lobject donc marche pas    
             assert(books[0]._id.equals(book1._id));
             done();
+        }).catch((error) => {
+            console.log("Promise rejected", error);
         })
     });
 
@@ -23,6 +27,8 @@ describe('Test read', () => {
         Book.findOne({ _id: book1._id }).then((book) => {
             assert(book._id.equals(book1._id));
             done();
+        }).catch((error) => {
+            console.log("Promise rejected", error);
         })
     });
 

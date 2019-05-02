@@ -7,6 +7,8 @@ describe('Create book', () => {
         book1.save().then(() => {
             assert(!book1.isNew);
             done();
+        }).catch((error) => {
+            console.log("Promise rejected", error);
         });
     })
 })

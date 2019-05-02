@@ -17,6 +17,8 @@ describe('Test update', () => {
                 assert(book.title === newTitle);
                 done();
             })
+        }).catch((error) => {
+            console.log("Promise rejected", error);
         })
     }
 
@@ -26,7 +28,7 @@ describe('Test update', () => {
     });
 
     it('update a book from model', (done) => {
-        assertTitle(Book.update({ title: 'Game of thrones' }, { title: newTitle }), done);
+        assertTitle(Book.updateOne({ title: 'Game of thrones' }, { title: newTitle }), done);
     });
 
     it('find one by title and update (findOneAndUpdate)', (done) => {
