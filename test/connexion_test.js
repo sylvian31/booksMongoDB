@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-before( (done) => {
+before((done) => {
     mongoose.connect('mongodb://localhost/books_test', {
-        useNewUrlParser: true 
+        useNewUrlParser: true
     });
-    
+
     mongoose.connection.once('open', () => {
         console.log("connexion etablie");
         done();
@@ -16,8 +16,8 @@ before( (done) => {
 })
 
 beforeEach('Delete old books', (done) => {
-    const {books} = mongoose.connection.collections;
-    books.drop( () => {
+    const { books } = mongoose.connection.collections;
+    books.drop(() => {
         done();
     })
 })
