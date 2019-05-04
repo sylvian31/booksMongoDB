@@ -1,7 +1,7 @@
 const assert = require('assert');
 const Book = require('../src/books');
 
-describe('Test update', () => {
+describe('Test update book', () => {
     let book1;
     let newTitle = 'Le seigneur des anneaux';
     beforeEach((done) => {
@@ -37,6 +37,19 @@ describe('Test update', () => {
 
     it('find one by id and update (findByIdAndUpdate)', (done) => {
         assertTitle(Book.findByIdAndUpdate(book1._id, { title: newTitle }), done);
+    })
+
+    it('find a book and increment pages', (done) => {
+        Book.updateOne({ title: 'Game of thrones' }, { $inc: { totalPages: 3 } })
+            .then(() => {
+                Book.findOne({ title: 'Game of thrones' })
+                    .then((book) => {
+                        assert(book.totalPages === 3);
+                        done();       
+                    })
+            }).catch((error) => {
+                console.log("Promise rejected", error);
+            });
     })
 
 })

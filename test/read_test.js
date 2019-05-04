@@ -1,7 +1,7 @@
 const assert = require('assert');
 const Book = require('../src/books');
 
-describe('Test read', () => {
+describe('Test read book', () => {
     let book1;
     beforeEach((done) => {
         book1 = new Book({ title: "Game of thrones" });
