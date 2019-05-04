@@ -9,4 +9,15 @@ describe('Test validation book', () => {
         assert(message === 'A title is required');
         done();
     })
+
+    it('a book must be less than 3000 pages ', (done) => {
+        const book1 = new Book({ title: 'Game of thrones', totalPages: 3001 });
+        book1.validate((validationResult) => {          
+            assert.ok(validationResult);
+            const { message } = validationResult.errors.totalPages;
+            assert(message === 'un livre doit avoir moins de 3000 pages');
+            done();
+        }); // validate asynchrone    
+
+    })
 })
