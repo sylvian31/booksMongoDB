@@ -12,9 +12,7 @@ describe('Test delete book', () => {
 
     function assertDelete(promise, done) {
         promise.then(() => {
-            Book.find({ title: 'Game of thrones' }).then((book) => {
-                console.log(book);
-                
+            Book.find({ title: 'Game of thrones' }).then((book) => {                
                 assert(0 === book.length);
                 done();
             })
